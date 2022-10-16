@@ -19,8 +19,8 @@ class adminController {
             const { username, password, role } = req.body
             const users = await Users.findOne({ where:{ username:username}})
             if (username == null || username == undefined || 
-                username == " " || password == null || 
-                password == undefined || password == " ") {
+                username == "" || password == null || 
+                password == undefined || password == "") {
                     return res.send('please input username or password')
                 }
                 if (users) return res.send('username has been register')

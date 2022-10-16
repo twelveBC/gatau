@@ -1,14 +1,18 @@
 const express = require('express');
-const passport = require('passport');
 const router = express.Router();
 const apiControllers = require('../controllers/apiControllers');
-const restrict = require('../middlewares/restrict');
+const restrictJWT = require('../middlewares/restrictJWT')
 
+router.get('/',apiControllers.dashboard)
 
-router.post('/signup')
-router.post('/login')
-router.post('/create-room')
-router.post('/fight/room-id')
+router.get('/signup',apiControllers.signup)
+router.post('/signup',apiControllers.actionSignup)
+
+router.get('/login',apiControllers.login)
+router.post('/login',apiControllers.actionLogin)
+
+router.get('/authorization',restrictJWT,apiControllers.isAuthorization)
+router.get('/fight/room-id',apiControllers.roomId)
 
 
 module.exports = router;
