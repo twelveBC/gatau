@@ -11,6 +11,7 @@ const flash =  require('express-flash')
 
 //your routes
 const adminRouter = require('./routes/admin')
+const apiRouter = require('./routes/api')
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', adminRouter);
+app.use('/api/v1', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
