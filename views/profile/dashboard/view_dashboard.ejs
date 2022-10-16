@@ -17,7 +17,12 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#myTable').DataTable();
+        $('#example').DataTable({
+            "bLengthChange" : false,
+            "bInfo":false,
+            "searching": false,
+            "pageLength": 5
+        });
     });
 </script>
 </body>
