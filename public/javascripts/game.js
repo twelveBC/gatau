@@ -92,9 +92,9 @@ function gameStart(props) {
       document.getElementById("vs").style.visibility = "hidden";
 
       // POST DATA GAMES
-      xhttp.open("POST", `${base_url}/play`, true);
+      xhttp.open("POST", `${base_url}/game`, true);
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhttp.send(`user=${props.target.id}&com=${game.getBot()}&result=${game.getIsRule()}`);
+      xhttp.send(`user=${props.target.id}&otherUser=${game.getBot()}&result=${game.getIsRule()}`);
 
       game.matchResult();
       if (game.player != null) {

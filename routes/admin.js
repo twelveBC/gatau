@@ -1,20 +1,32 @@
 const express = require('express');
+const passport = require('passport');
 const router = express.Router();
-const admControllers = require('../controllers/admControllers')
+const admControllers = require('../controllers/admControllers');
+const restrict = require('../middlewares/restrict');
 
-router.get('/',admControllers.home)
+router.get('/',restrict.isLogin,admControllers.dashboard)
 
 router.get('/login',admControllers.login)
-router.post('/login', admControllers.actionLogin)
+router.post('/login', passport.authenticate('local',{
+    successRedirect: '/biodata',
+    failureRedirect: '/login',
+    failureFlash: true
+}))
 
 router.get('/signup',admControllers.signup)
 router.post('/signup',admControllers.actionSignUp)
 
-router.get('/biodata',isLogin,admControllers.biodata)
-router.get('/profile',isLogin,admControllers.profile)
-router.get('/dashboard',isLogin,admControllers.dashboard)
-router.get('/game',isLogin,admControllers.game)
+router.get('/biodata',restrict.isLogin,admControllers.biodata)
+router.post('/biodata',admControllers.actionBiodata)
 
-router.post('/logout',admControllers.logout)
+router.get('/profile',restrict.isLogin,admControllers.profile)
+router.post('/profile',admControllers.actionProfile)
+
+router.get('/dashboard',restrict.isLogin,admControllers.dashboard)
+
+router.get('/game',restrict.isLogin,admControllers.game)
+router.post('/game',admControllers.actionGame)
+
+router.get('/logout',admControllers.logout)
 
 module.exports = router;

@@ -4,10 +4,24 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const usersRouter = require('./routes/users');
+// your middleware 
+const passport = require('./middlewares/passportLocal')
+const session = require('express-session')
+const flash =  require('express-flash')
+
+//your routes
 const adminRouter = require('./routes/admin')
 
 const app = express();
+
+app.use(session({
+  secret: 'thisismysecrctekey2022',
+  resave: false,
+  saveUninitialized: false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(flash())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,7 +33,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/users', usersRouter);
 app.use('/', adminRouter);
 
 // catch 404 and forward to error handler
