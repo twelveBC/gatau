@@ -12,7 +12,9 @@ router.get('/login',apiControllers.login)
 router.post('/login',apiControllers.actionLogin)
 
 router.get('/authorization',restrictJWT,apiControllers.isAuthorization)
-router.get('/fight/room-id',apiControllers.roomId)
+router.post('/create-room',apiControllers.createRoom)
+// router.get('/fight/room-id',apiControllers.roomId)
+router.post('/fight/room-id',apiControllers.roomId)
 
 
 module.exports = router;

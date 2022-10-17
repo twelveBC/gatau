@@ -10,9 +10,9 @@ function getToken(id, username, role) {
     return token
 }
 
-function authenticataToken(params) {
+function authenticateToken(params) {
     var decoded = jwt.verify(params, process.env.SecretKey);
     return decoded
 }
 
-module.exports = { getToken, authenticataToken }
+module.exports = { getToken, authenticateToken }
